@@ -1,0 +1,16 @@
+.menu__title-avatar {
+    margin: 34px 0 54px 36px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 29px;
+}
+
+
+@media screen and (max-width: 879px) {
+    .menu__title-avatar{
+        margin-left: 24px;
+    }
+    
+}

@@ -1,0 +1,21 @@
+.form-register__button {
+    margin: 186px 0 0 0;
+    cursor: pointer;
+    background: #FFFFFF;
+    border: none;
+    border-radius: 2px;
+    width: 358px;
+    height: 50px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    color: #000000;
+}
+@media screen and (max-width:880px) {
+    .form-register__button{
+        max-width: 234px;
+    }
+}

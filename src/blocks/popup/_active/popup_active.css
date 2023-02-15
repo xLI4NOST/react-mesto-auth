@@ -1,0 +1,9 @@
+.popup_active {
+    display: block;
+    animation: opacity 0.7s ease-in;
+}
+
+.popup_active:hover {
+    opacity: 1;
+}
+

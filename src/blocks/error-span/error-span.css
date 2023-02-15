@@ -1,0 +1,25 @@
+.error-span {
+    display: block;
+    position: absolute;
+    left: 33px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    color: #FF0000;
+}
+
+@media screen and (max-width:879px) {
+    .error-span {
+        display: block;
+        position: absolute;
+        left: 23px;
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 15px;
+        color: #FF0000;
+    }
+}

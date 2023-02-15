@@ -1,0 +1,26 @@
+.profile__avatar-edit-button{
+    width: 127px;
+    height: 127px;
+    background-position: center;
+    left: 50%;
+    border: none;
+    border-radius: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+    background-image: url(../../../images/vector/pansel.svg);
+    background-color: transparent;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    opacity: 0;
+}
+
+@media screen and (max-width:879px) {
+    .profile__avatar-edit-button{
+        left: 50%;
+    }
+}
+
+.profile__avatar-edit-button:hover{
+    background-color: black;
+    opacity: 0.8;
+}

@@ -1,0 +1,12 @@
+.animation-open{
+    animation: opacity 0.7s ease-in;
+}
+  @keyframes opacity {
+    from {
+        opacity: 0;
+    }
+  
+    to {
+        opacity: 1;
+    }
+  }

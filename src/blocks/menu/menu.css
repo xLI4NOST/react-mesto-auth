@@ -1,0 +1,16 @@
+.menu {
+    left: 50%;
+    top: 20%;
+    transform: translateX(-50%);
+    z-index: 3;
+    position: fixed;
+    background-color: #FFFFFF;
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+}
+
+@media screen and (max-width: 879px) {
+    .menu{
+        max-width: 282px;
+    }
+}

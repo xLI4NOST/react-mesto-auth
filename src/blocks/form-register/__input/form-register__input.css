@@ -1,0 +1,11 @@
+.form-register__input {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #545454;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #CCCCCC;
+}

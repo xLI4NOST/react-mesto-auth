@@ -1,0 +1,11 @@
+.menu-avatar{
+    height: 272px;
+}
+
+@media screen and (max-width: 879px) {
+    .menu-avatar{
+        height: 272px;
+        width: 320px;
+    }
+    
+}

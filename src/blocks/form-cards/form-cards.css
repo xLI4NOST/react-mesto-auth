@@ -1,0 +1,9 @@
+.form-cards{
+    max-width: 430px;
+}
+
+@media screen and (max-width: 879px) {
+    .form-cards{
+        max-width: 238px;
+    }
+}

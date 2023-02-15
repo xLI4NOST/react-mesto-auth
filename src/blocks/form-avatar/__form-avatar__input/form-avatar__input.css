@@ -1,0 +1,10 @@
+.form-avatar__input{
+    width: 358px;
+margin: 0 0 36px 36px;
+}
+
+@media screen and (max-width: 879px) {
+    .form-avatar__input{
+        margin-left: 24px;
+    }
+}

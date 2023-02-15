@@ -1,0 +1,26 @@
+.menu__close-icon {
+    top: -40px;
+    left: 99.9%;
+    position: fixed;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    border: 0;
+    background-color: black;
+    background: transparent;
+    background-image: url("../../../images/vector/Close_Icon.svg");
+}
+
+.menu__close-icon:hover {
+    opacity: 0.6;
+}
+
+@media screen and (max-width: 396px) {
+    .menu__close-icon {
+        width: 20px;
+        height: 20px;
+        left: 95%;
+        top: -30px;
+        background-size: 20px 20px;
+    }
+}

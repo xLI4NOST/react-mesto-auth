@@ -1,0 +1,9 @@
+.menu-avatar__button{
+    margin: 0 0 36px 36px;
+}
+
+@media screen and (max-width: 879px) {
+    .menu-avatar__button{
+        margin-left: 24px;
+    }
+}

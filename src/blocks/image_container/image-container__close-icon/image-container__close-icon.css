@@ -1,0 +1,17 @@
+.image-container__close-icon {
+    position: absolute;
+    top: 0;
+    right: -40px;
+    cursor: pointer;
+    width: 37px;
+    height: 32px;
+    border: 0;
+    margin: -38px 0 0 5px;
+    background: transparent;
+    background-image: url("../../../images/vector/Close_Icon.svg");
+    background-repeat: no-repeat;
+}
+
+.image-container__close-icon:hover {
+    opacity: 0.6;
+}

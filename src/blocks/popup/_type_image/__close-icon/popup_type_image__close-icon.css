@@ -1,0 +1,25 @@
+.popup_type_image__close-icon {
+    position: relative;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+    width: 37px;
+    height: 32px;
+    border: 0;
+    margin: -38px 0 0 5px;
+    background-repeat: no-repeat;
+}
+
+
+
+.popup_type_image__close-icon:hover {
+    opacity: 0.6;
+}
+
+@media screen and (max-width: 396px) {
+    .popup_type_image__close-icon {
+        width: 20px;
+        height: 20px;
+        background-size: 20px 20px;
+    }
+}

@@ -1,0 +1,25 @@
+.form__input {
+    border: 0;
+    width: 358px;
+    height: 27px;
+    margin: 30px 34px 0;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #000000;
+    border-bottom: 1px solid #000000;
+}
+
+.form__input_error {
+    border-bottom: 1px solid red;
+}
+
+@media screen and (max-width: 879px) {
+    .form__input{
+        text-overflow: ellipsis;
+        max-width: 238px;
+        margin: 30px 22px 0;
+    }
+}

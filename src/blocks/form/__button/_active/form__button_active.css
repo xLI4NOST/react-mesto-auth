@@ -1,0 +1,7 @@
+.form__button_active{
+    cursor: pointer;
+    border: 0;
+    background: #000000;
+    color: #FFFFFF;
+    opacity: 1;
+}
