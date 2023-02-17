@@ -2,22 +2,22 @@
 import '../index.css'
 import './landing/header.js'
 import { React, useState, useEffect, useCallback } from 'react';
-import {Route, Routes, Navigate, useNavigate} from 'react-router-dom'
+import { Route, Routes, Navigate, useNavigate } from 'react-router-dom'
 import Header from './landing/header.js';
-import Footer from './landing/footer';
+import Footer from './landing/Footer';
 import PopupWithForm from './landing/popupWithForm';
-import Main from './landing/main';
-import ImagePopup from './landing/imagePopup';
-import { userContext } from '../contexts/CurrentUserContext.js'
+import Main from './landing/Main';
+import ImagePopup from './landing/ImagePopup';
+import { UserContext } from '../contexts/CurrentUserContext.js'
 import { api } from "../utils/Api";
 import EditProfilePopup from "../components/landing/EditProfilePopup.js"
 import EditAvatarPopup from "./landing/EditAvatarPopup.js"
 import AddPlacePopup from './landing/AddPlacePopup';
 import Register from './landing/userReg/Register';
-import SignIn from './landing/userReg/sign-in';
-import InfoToolTip from './landing/userReg/InfoToolTip';
-import {authApi} from '../utils/AuthApi'
+import SignIn from './landing/userReg/Sign-in';
+import { authApi } from '../utils/AuthApi'
 import ProtectedRouteElement from './landing/userReg/ProtectedRoute';
+import MobileMenu from './landing/mobileMenu';
 
 function App() {
 
@@ -28,10 +28,11 @@ function App() {
   const [cards, setCards] = useState([])
   const [selectedCard, setIsSelectedCard] = useState(null)
   const [currentUser, setCurrentUser] = useState({})
-  const [isLogin, setIsLogin] = useState (false)
-  const [isEmail, setIsEmail] = useState ('')
+  const [isLogin, setIsLogin] = useState(false)
+  const [email, setEmail] = useState('')
+  const [isBurger, setIsBurger] = useState(false)
 
-let navigate = useNavigate()
+  const navigate = useNavigate()
 
   useEffect(() => {
     Promise.all([api.getUserData(), api.getInitialCards()])
@@ -45,25 +46,27 @@ let navigate = useNavigate()
 
   }, [])
 
-  useEffect(()=>{
+  useEffect(() => {
     handleTokenCheck()
   }, [isLogin])
 
   //Меняем профиль
-  function handleUpdateUser({ name, about }) {
+  function handleUpdateUser({ name, about }, callback) {
     api.changeUserInfo(name, about)
       .then((newInfo) => {
         setCurrentUser(newInfo)
+        callback(true)
       })
       .catch(err => {
         console.log(err);
       });
   }
   //Avatar
-  function handleUpdateAvatar(link) {
+  function handleUpdateAvatar(link, callback) {
     api.changeUserAvatar(link.avatar)
       .then((newInfo) => {
         setCurrentUser(newInfo)
+        callback(true)
       })
       .catch(err => {
         console.log(err);
@@ -71,65 +74,58 @@ let navigate = useNavigate()
   }
 
   //Создаем карточку 
-  function handleAddPlaceSubmit(value) {
+  function handleAddPlaceSubmit(value, callback) {
     api.addNewCard(value.place, value.link)
       .then((newCard) => {
         setCards([newCard, ...cards]);
+        callback(true)
       })
       .catch(err => {
         console.log(err);
       });
   }
 
-//регистрируемся 
+  //регистрируемся 
 
 
-// авторизируемся
-function handleAutorizUser (email, password, callback){
-  authApi.autorizeUser(email, password)
-  .then((res)=>{
-      localStorage.setItem('token', res.token);
-      console.log(res);
-      setIsLogin(true)
-      callback(true);
-    })
-  .catch((err)=>{
-    console.log(err);
-    callback(false, err);
-  })
+  // авторизируемся
+  function handleAutorizUser(email, password, callback) {
+    authApi.autorizeUser(email, password)
+      .then((res) => {
+        localStorage.setItem('token', res.token);
+        console.log(res);
+        setIsLogin(true)
+        callback(true);
+      })
+      .catch((err) => {
+        console.log(err);
+        callback(false, err);
+      })
 
-}
+  }
 
-//Проверяем токен
+  //Проверяем токен
 
-function handleTokenCheck (){
-if (localStorage.getItem('token')){
-  let jwt = localStorage.getItem('token')
-  authApi.checkTokenUser(jwt).then ((res)=>{
-    if(res){
-      setIsEmail(res.data.email)
-      console.log(res);
-      setIsLogin(true)
-      navigate('/')
-      return true
-    } else{
-      navigate('/sign-in')
-      setIsLogin(false)
+  function handleTokenCheck() {
+    if (localStorage.getItem('token')) {
+      const jwt = localStorage.getItem('token')
+      authApi.checkTokenUser(jwt).then((res) => {
+        if (res) {
+          setEmail(res.data.email)
+          console.log(res);
+          setIsLogin(true)
+          navigate('/')
+          return true
+        } else {
+          navigate('/sign-in')
+          setIsLogin(false)
+        }
+      })
+        .catch((err) => {
+          console.log(err);
+        })
     }
-  })
-}
-}
-
-
-// function handleTokenCheck (){
-//   authApi.checkTokenUser(jwt)
-//   .then ((res)=>{
-//     if(res.data._id){
-//       setIsEmail(res.data.email)
-//       setIsLogin (true)
-//     }
-//   })
-// }
+  }
 
 
 
@@ -191,46 +187,42 @@ if (localStorage.getItem('token')){
     setIsSelectedCard(card)
   }
 
-
-
-  function closeState() {
+  function closeAllPopups() {
     setIsEditProfilePopupOpen(false);
     setIsCardsPopupOpen(false);
     setIsAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsSelectedCard(null)
   }
+  // закрываем на esc
+  const isOpen = isAvatarPopupOpen || isEditProfilePopupOpen || isCardsPopupOpen || selectedCard
 
-  const allPopups = document.querySelectorAll('.popup')
-
-  function closeAllPopups() {
-    // allPopups.forEach((elem) => {
-    //   elem.classList.add('animation-close')
-    // })
-    // setTimeout(() => {
-    //   closeState()
-    //   allPopups.forEach((elem) => {
-    //     elem.classList.remove('animation-close')
-    //   })
-    // }, 500);
-    closeState()
-  }
+  useEffect(() => {
+    function closeByEscape(evt) {
+      if (evt.key === 'Escape') {
+        closeAllPopups();
+      }
+    }
+    if (isOpen) {
+      document.addEventListener('keydown', closeByEscape);
+      return () => {
+        document.removeEventListener('keydown', closeByEscape);
+      }
+    }
+  }, [isOpen])
 
 
   return (
 
-    <>
-      <userContext.Provider value={currentUser}>
-        <meta charSet="UTF-8" />
-        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Место</title>
-        <div className='page'>
-          <div className="wrapper">
-            {isLogin && <Header onEmail= {isEmail} onLogin={isLogin} setLogin ={setIsLogin} onToken={handleTokenCheck}/>}
-            <Routes>
-              <Route path='/sign-up' element ={ isLogin? <Navigate to = "/"/>:<Register onToken ={handleTokenCheck}  />}/>
-              {/* <Route path='/' element ={isLogin?  <Main
+
+    <UserContext.Provider value={currentUser}>
+      <div className='page'>
+        <div className="wrapper">
+          {isBurger && <MobileMenu onEmail={email} onLogin={isLogin} setLogin={setIsLogin} onToken={handleTokenCheck} />}
+          {isLogin && <Header isBurger={isBurger} setIsBurger={setIsBurger} onEmail={email} onLogin={isLogin} setLogin={setIsLogin} onToken={handleTokenCheck} />}
+          <Routes>
+            <Route path='/sign-up' element={isLogin ? <Navigate to="/" /> : <Register isBurger={isBurger} setIsBurger={setIsBurger} onToken={handleTokenCheck} />} />
+            {/* <Route path='/' element ={isLogin?  <Main
               onEditProfile={openEditProfile}
               addNewCard={openAddNewCard}
               changeAvatar={openChangeAvatar}
@@ -240,43 +232,43 @@ if (localStorage.getItem('token')){
               cards={cards}
               onCardDelete={handleCardDelete}
             /> : <Navigate to = "/sign-in"/> }/> */}
-            <Route path='/sign-in' element={ isLogin? <Navigate to="/"/> :<SignIn onToken ={handleTokenCheck} onAuthorize={handleAutorizUser} onLogin={isLogin} setLogin= {setIsLogin}/>}/>
-                <Route path='/' element={
-                  <ProtectedRouteElement isLogin= {isLogin}>
-                    <Main
-                    onEditProfile={openEditProfile}
-                    addNewCard={openAddNewCard}
-                    changeAvatar={openChangeAvatar}
-                    // confirm={openPopupConfirm}
-                    onCardClick={handleCardClick}
-                    onCardLike={handleCardLike}
-                    cards={cards}
-                    onCardDelete={handleCardDelete}
-                    />
-                  </ProtectedRouteElement>
-                }/>
-            </Routes>
-           
-            <Footer />
-          </div>
+            <Route path='/sign-in' element={isLogin ? <Navigate to="/" /> : <SignIn isBurger={isBurger} setIsBurger={setIsBurger} onToken={handleTokenCheck} onAuthorize={handleAutorizUser} onLogin={isLogin} setLogin={setIsLogin} />} />
+            <Route path='/' element={
+              <ProtectedRouteElement isLogin={isLogin}>
+                <Main
+                  onEditProfile={openEditProfile}
+                  addNewCard={openAddNewCard}
+                  changeAvatar={openChangeAvatar}
+                  // confirm={openPopupConfirm}
+                  onCardClick={handleCardClick}
+                  onCardLike={handleCardLike}
+                  cards={cards}
+                  onCardDelete={handleCardDelete}
+                />
+              </ProtectedRouteElement>
+            } />
+          </Routes>
+
+          <Footer />
         </div>
+      </div>
 
-        <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
-        <EditAvatarPopup isOpen={isAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
-        <AddPlacePopup isOpen={isCardsPopupOpen} onClose={closeAllPopups} onAddCard={handleAddPlaceSubmit} />
+      <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
+      <EditAvatarPopup isOpen={isAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
+      <AddPlacePopup isOpen={isCardsPopupOpen} onClose={closeAllPopups} onAddCard={handleAddPlaceSubmit} />
 
-        <PopupWithForm
-          name='confirm'
-          title='Вы уверены?'
-          closeAll={closeAllPopups}
-          isOpen={isConfirmPopupOpen}
-        />
-        <ImagePopup
-          card={selectedCard}
-          closeAll={closeAllPopups}
-        />
-      </userContext.Provider>
-    </>
+      <PopupWithForm
+        name='confirm'
+        title='Вы уверены?'
+        closeAll={closeAllPopups}
+        isOpen={isConfirmPopupOpen}
+      />
+      <ImagePopup
+        card={selectedCard}
+        closeAll={closeAllPopups}
+      />
+    </UserContext.Provider>
+
   );
 }
 

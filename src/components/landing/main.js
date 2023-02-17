@@ -1,17 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
 import { api } from "../../utils/Api";
-import Card from "./card";
-import { userContext} from '../../contexts/CurrentUserContext.js'
+import Card from "./Card";
+import { UserContext} from '../../contexts/CurrentUserContext.js'
 function Main(props) {
 
-    const apiUserContext = React.useContext(userContext)
-    
+    const apiUserContext = React.useContext(UserContext)
+
     return (
         <div className="main">
             <section className="profile">
                 <div className="profile__avatar-block">
                     <button type="button" onClick={props.changeAvatar} className="profile__avatar-edit-button" />
-                    <img className="profile__avatar" src={apiUserContext.avatar} alt="Кусто" />
+                    <img className="profile__avatar" src={apiUserContext.avatar} alt={apiUserContext.about} />
                 </div>
                 <article className="profile__info">
                     <div className="profile__heading">
@@ -23,7 +23,7 @@ function Main(props) {
                 <button type="button" onClick={props.addNewCard} className="profile__add-button" />
             </section>
             <section className="elements">
-                {props.cards.map((card) =>
+                {props.cards.map((card) =>(
                     <Card
                         onCardLike = {props.onCardLike}
                         key={card._id}
@@ -32,7 +32,7 @@ function Main(props) {
                         click={props.onCardClick}
                         onCardDelete ={props.onCardDelete}
                     />
-                )}
+                ))}
             </section>
         </div>
     )

@@ -62,6 +62,10 @@
 @import url(blocks/header/__logo/header__logo.css);
 @import url(blocks/header/__email/header__email.css);
 @import url(blocks/header/__login-box/header__login-box.css);
+@import url(blocks/header/__burger/header__burger.css);
+@import url(blocks/header/__burger/__line/header__burger__line.css);
+@import url(blocks/header/__login-box/_type_mobile/header__login-box_type_mobile.css);
+@import url(blocks/header/__burger/__close-icon/header__burger__close-icon.css);
 /* profile */
 @import url(blocks/profile/profile.css);
 @import url(blocks/profile//__avarar-block/profile__avatar-block.css);
@@ -99,3 +103,4 @@
 @import url(blocks/infoToolTip/__image/infoToolTipOverlay__image.css);
 @import url(blocks/infoToolTip/__menu/infoToolTipOverlay__menu.css);
 @import url(blocks/infoToolTip/__text/infoToolTipOverlay__text.css);
+

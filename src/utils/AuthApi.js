@@ -27,10 +27,6 @@ export default class AuthApi {
         }
         )
         .then(this._checkResponse)
-         
-          .catch((err)=>{
-            console.log(err);
-          })
       }
 
       checkTokenUser(token) {

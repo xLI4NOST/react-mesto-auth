@@ -9,9 +9,9 @@ function Register(props) {
     const [password, setIsPassword] = useState('')
     const [isOpen, setIsOpen] = useState(false)
     const [isRight, setIsright] = useState(false)
-    const [isReg, setIsReg]= useState(true)
+    const [isReg, setIsReg] = useState(true)
 
-    let navigate = useNavigate()
+    const navigate = useNavigate()
     function handleSetEmail(e) {
         setIsEmail(e.target.value)
         console.log(email);
@@ -49,15 +49,11 @@ function Register(props) {
         handleRegistr(email, password)
 
     }
-    // let navigate = useNavigate()
-    // function signIn(){
-    //     localStorage.removeItem('token');
-    //     navigate('/sign-in');
-    //   }
+ 
 
     return (
         <>
-        <Header onText={'Войти'} onReg={isReg} />
+            <Header onText={'Войти'} onReg={isReg} isBurger={props.isBurger} setIsBurger={props.setIsBurger} />
             <section className="register">
                 <h2 className="register__text">Регистрация</h2>
                 <form className="form form-register" onSubmit={handleSubmit}>

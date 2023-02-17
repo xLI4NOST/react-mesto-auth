@@ -1,5 +1,14 @@
-.header__login-box{
+.header__login-box {
     display: flex;
     flex-direction: row;
     gap: 24px;
+}
+
+@media screen and (max-width: 880px) {
+    .header__login-box {
+        margin: 0 auto 90px;
+        flex-direction: column;
+        gap: 10px;
+        display: none;
+    }
 }

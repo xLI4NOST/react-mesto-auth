@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import PopupWithForm from "./popupWithForm";
-import { userContext } from "../../contexts/CurrentUserContext";
+import { UserContext } from "../../contexts/CurrentUserContext";
 
 function EditProfilePopup(props) {
-    const apiUserContext = React.useContext(userContext)
+    const apiUserContext = React.useContext(UserContext)
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     React.useEffect(() => {
@@ -27,8 +27,12 @@ function EditProfilePopup(props) {
         props.onUpdateUser({
           name,
           about: description
+        }, (callback)=>{
+            if(callback){
+                props.onClose()
+            }
         });
-        props.onClose()
+        
       }
 
     return (

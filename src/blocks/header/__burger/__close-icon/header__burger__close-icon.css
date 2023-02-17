@@ -1,0 +1,8 @@
+.header__burger__close-icon{
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    border: none;
+background-image: url(../../../../images/vector/Close_Icon.svg);
+background-color: transparent;
+}

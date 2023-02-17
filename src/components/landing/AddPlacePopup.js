@@ -23,8 +23,12 @@ function AddPlacePopup(props) {
         props.onAddCard({
             place: place,
             link: link
+        }, (callback)=>{
+            if(callback){
+                props.onClose()
+            }
         })
-        props.onClose()
+        
     }
 
     return (

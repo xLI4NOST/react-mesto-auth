@@ -13,8 +13,12 @@ function EditAvatarPopup(props) {
 
         props.onUpdateAvatar({
             avatar: avatarRef.current.value
+        }, (callback)=>{
+            if(callback){
+                props.onClose()
+            }
         });
-        props.onClose()
+        
     }
 
     return (

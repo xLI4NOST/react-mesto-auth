@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { userContext } from '../../contexts/CurrentUserContext.js'
+import { UserContext } from '../../contexts/CurrentUserContext.js'
 function Card(props) {
     function handleClick() {
         props.click(props.card);
@@ -13,7 +13,7 @@ function Card(props) {
           props.onCardDelete (props.card)
       }
 
-      const apiUserContext = React.useContext(userContext)
+      const apiUserContext = React.useContext(UserContext)
       const isOwn = props.card.owner._id === apiUserContext._id;
       const isLiked = props.card.likes.some(i => i._id === apiUserContext._id);
       const cardLikeButtonClassName = ( 
