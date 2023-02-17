@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Navigate, useNavigate } from "react-router";
 import InfoToolTip from "./InfoToolTip";
 import Header from "../header";
+import { Link } from "react-router-dom";
 function Register(props) {
     const [email, setIsEmail] = useState('')
     const [password, setIsPassword] = useState('')
@@ -61,7 +62,7 @@ function Register(props) {
                     <input value={password || ''} onChange={handleSetPassword} type="Password" placeholder="Пароль" className="form__ input form-register__input form-register_input_type_pass" />
                     <button type="submit" className="form__button form-register__button">Зарегистрироваться</button>
                 </form>
-                <button type="button" className="register__button-login">Уже зарегистрированы? Войти</button>
+                <button type="button" className="register__button-login"><Link  to='/sign-in' className="register__button-login">Уже зарегистрированы? Войти</Link></button>
                 <InfoToolTip onClose={onClose} onOpen={isOpen} onRight={isRight} />
             </section>
         </>
