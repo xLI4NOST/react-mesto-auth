@@ -3,7 +3,7 @@ import AuthApi, { authApi } from "../../../utils/AuthApi";
 import { useState } from "react";
 import { Navigate, useNavigate } from "react-router";
 import InfoToolTip from "./InfoToolTip";
-import Header from "../header";
+import Header from "../Header";
 import { Link } from "react-router-dom";
 function Register(props) {
     const [email, setIsEmail] = useState('')

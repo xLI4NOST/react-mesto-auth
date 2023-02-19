@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import PopupWithForm from "./popupWithForm";
+import PopupWithForm from "./PopupWithForm";
 
 function AddPlacePopup(props) {
     const [place, setPlace] = useState('')

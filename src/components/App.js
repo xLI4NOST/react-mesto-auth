@@ -1,11 +1,11 @@
 
 import '../index.css'
-import './landing/header.js'
+import './landing/Header.js'
 import { React, useState, useEffect, useCallback } from 'react';
 import { Route, Routes, Navigate, useNavigate } from 'react-router-dom'
-import Header from './landing/header.js';
+import Header from './landing/Header.js';
 import Footer from './landing/Footer';
-import PopupWithForm from './landing/popupWithForm';
+import PopupWithForm from './landing/PopupWithForm';
 import Main from './landing/Main';
 import ImagePopup from './landing/ImagePopup';
 import { UserContext } from '../contexts/CurrentUserContext.js'
@@ -17,7 +17,7 @@ import Register from './landing/userReg/Register';
 import SignIn from './landing/userReg/Sign-in';
 import { authApi } from '../utils/AuthApi'
 import ProtectedRouteElement from './landing/userReg/ProtectedRoute';
-import MobileMenu from './landing/mobileMenu';
+import MobileMenu from './landing/MobileMenu';
 
 function App() {
 

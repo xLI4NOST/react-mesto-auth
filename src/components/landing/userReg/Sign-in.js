@@ -3,8 +3,8 @@ import { useState } from "react";
 import AuthApi, { authApi } from "../../../utils/AuthApi";
 import { Navigate, useNavigate } from "react-router";
 import InfoToolTip from "./InfoToolTip";
-import Header from "../header";
-import MobileMenu from "../mobileMenu";
+import Header from "../Header";
+import MobileMenu from "../MobileMenu";
 function SignIn(props) {
     const [email, setIsEmail] = useState('')
     const [password, setIsPassword] = useState('')
